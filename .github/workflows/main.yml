@@ -57,6 +57,12 @@ on:
         required: true
         type: string
 
+      tweak_url:
+        description: "Direct URL to a YouTube Plus .deb (overrides tweak_version download; leave empty for normal use)"
+        default: ""
+        required: false
+        type: string
+
       display_name:
         description: "App Name (Optional)"
         default: "YouTube"
@@ -91,6 +97,7 @@ jobs:
       enable_demc: ${{ inputs.enable_demc }}
       enable_localization: ${{ inputs.enable_localization }}
       tweak_version: ${{ inputs.tweak_version }}
+      tweak_url: ${{ inputs.tweak_url }}
 
   package:
     name: Package IPA
@@ -109,7 +116,7 @@ jobs:
       - name: Hide sensitive inputs
         uses: levibostian/action-hide-sensitive-inputs@v1
         with:
-          exclude_inputs: bundle_id,display_name,enable_demc,enable_ryd,enable_ytabc,enable_youpip,enable_yq,enable_ytuhd,enable_localization,info_note,tweak_version
+          exclude_inputs: bundle_id,display_name,enable_demc,enable_ryd,enable_ytabc,enable_youpip,enable_yq,enable_ytuhd,enable_localization,info_note,tweak_version,tweak_url
 
       - name: Download and validate IPA
         run: |
